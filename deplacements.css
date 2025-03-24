@@ -1,0 +1,143 @@
+/* style du body*/
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Dégradé plus moderne */
+    color: #333; /* Texte légèrement plus doux pour le contraste */
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; /* Change align-items pour éviter l'écrasement en haut */
+    min-height: 100vh; /* Utiliser min-height au lieu de height */ 
+    margin: 0;
+    transition: all 0.3s ease-in-out; /* Transition fluide */
+}
+
+
+/* conteneur principal avec formulaire et résultat*/
+.container {
+    width: 80%;
+    max-width: 900px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.9); /* Fond semi-transparent pour un effet élégant */
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12); /* Ombre plus douce */
+    backdrop-filter: blur(10px); /* Effet de flou moderne */
+}
+
+
+/* Titre */
+h1, h2 , h3 {
+    text-align: center;
+    color: #34495e; /* Bleu foncé plus élégant */
+    font-weight: 600; /* Texte plus marqué */
+}
+h1 {
+    text-align: center;
+    color: #34495e;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-top: 40px; /* Ajout d'espace au-dessus */
+    margin-bottom: 20px;
+}
+
+
+h2 {
+  
+  
+    font-size: 1.5rem;
+}
+
+#form-section {
+    padding-top: 40px; /* Ajoute de l'espace en haut */
+}
+
+
+
+/* Sections */
+section {
+    padding: 20px;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+section:hover {
+    transform: translateY(-5px); /* Effet de survol dynamique */
+}
+
+
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+    animation: fadeIn 1s ease-in-out; /* Animation douce */
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+.logo {
+    width: 80px; /* Taille légèrement augmentée */
+    height: auto;
+}
+
+
+  /* Champs de saisie et sélecteurs */
+
+
+select {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border 0.3s;
+}
+input:focus, select:focus {
+    border-color: #3498db; /* Bleu clair au focus */
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+input, select {
+    display: block;
+    width: 100%;
+}
+input[type="number"] {
+    width: 90%;
+    padding: 14px;
+    font-size: 1em;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+}
+
+button{
+    padding :12px 24px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.3s;
+
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+
+  #result-section{
+    display: none;
+    animation: fadeIn 0.5s;
+  }
+
