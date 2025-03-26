@@ -1,20 +1,23 @@
 //tableaux de stockage
 
 let peopleTransports=[];//déplacements domicile travail
-let gasT=[]; //différents carburants
+
 let peopleWtransport=[]; //déplacement cadre travail
-let gasW=[];// différents carburants cadre travail
+
 let peopleItransport=[]; //déplacements invités
-let gasI=[]; //différents carburants invités
+
+let peopleStageTransport=[];
 
 //variables totales de calcul
 let totalCO2 = 0;
 let co2DeplacementsDomicileTravail=0;
-let co2DeplacementsDomicileTravailCarburant=0;
+
 let co2DeplacementsCadreTravail = 0;
-let co2DeplacementsCadreTravailCarburant=0;
+
 let co2DeplacementsInvites=0;
-let co2DeplacementsInvitesCarburant=0;
+
+let co2DeplacementsStage=0;
+
 //fonction d'ajout et de mises à jours des listes
 
 //déplacement domicile travail
@@ -23,17 +26,14 @@ function addPeopleTransport(){
 
     const mode = document.getElementById("deplacementdtmode").value;
     const distance = parseFloat(document.getElementById("distancedt").value);
-    const number = parseInt(document.getElementById("peopledt").value);
+    
 
 //-------------------------REvoir la gestion des erreurs correctement-------//
     if (mode && !isNaN(distance) && distance > 0) {
-        if (isNaN(number) || number < 1) {
-            alert("Veuillez renseigner un nombre valide (>=1).");
-            return;
-        }
+        
 
     
-       peopleTransports.push({mode: mode, distance: distance, number: number});
+       peopleTransports.push({mode: mode, distance: distance});
        updatePeopleTransportList();
 }
 }
@@ -43,52 +43,14 @@ function updatePeopleTransportList(){
     list.innerHTML='';
     peopleTransports.forEach(pt=>{
         const li = document.createElement('li');
-        li.textContent= `Mode: ${pt.mode}, Distance: ${pt.distance} km, ${pt.mode === "voitureEssence" || pt.mode === "voitureDiesel" || pt.mode === "hybride" || pt.mode ==="electrique" ? "Voitures" : "Personnes"}: ${pt.number}`;
+        li.textContent= `Mode: ${pt.mode}, Distance: ${pt.distance} km, ${pt.mode === "voitureEssence" || pt.mode === "voitureDiesel" || pt.mode === "hybride" || pt.mode ==="electrique" ? "Voitures" : "Personnes"}: `;
         list.appendChild(li);
     });
 }
 
-function updatePeopleNumberLabel() {
-    const mode = document.getElementById("deplacementdtmode").value;
-    const label = document.getElementById("peoplenumber"); // On récupère l'élément label
 
-    // On compare directement la valeur
-    if (mode === "voitureEssence" || mode === "voitureDiesel" || mode ==="hybride" || mode ==="electrique") {
-        label.textContent = "Nombre de voitures :";
-    } else {
-        label.textContent = "Nombre de personnes :";
-    }
 
-    
-}
 
-function addGas(){
-    const type = document.getElementById("gas").value;
-    const quantity = parseFloat(document.getElementById("gas-quantity").value);
-//rajouter correctement la gestion des erreurs
-
-// --------------------------------//
-    if(type && !isNaN(quantity) && quantity>0){
-        if (isNaN(quantity) || quantity < 1) {
-            alert("Veuillez renseigner un nombre valide (>=1).");
-            return;
-        }
-
-        gasT.push({type: type, quantity: quantity});
-        updateGasList();
-      
-    }
-}
-
-function updateGasList(){
-    const list = document.getElementById("gas-list");
-    list.innerHTML='';
-    gasT.forEach(gt=>{
-        const li = document.createElement('li');
-        li.textContent = `Carburant: ${gt.type}, Quantité: ${gt.quantity} L`;
-        list.appendChild(li);
-    });
-}
 
 //--- fonction pour les déplacements cadre de travail-------
 function addPeopleWTransport(){
@@ -138,33 +100,37 @@ function updatePeopleWNumberLabel() {
     
 }
 
-function addGasW(){
-    const type = document.getElementById("gasw").value;
-    const quantity = parseFloat(document.getElementById("gasw-quantity").value);
-//rajouter correctement la gestion des erreurs
+//ajouter déplacement Stage---///
 
-// --------------------------------//
-    if(type && !isNaN(quantity) && quantity>0){
-        if (isNaN(quantity) || quantity < 1) {
-            alert("Veuillez renseigner un nombre valide (>=1).");
-            return;
-        }
+function addPeopleStageTransport(){
 
-        gasW.push({type: type, quantity: quantity});
-        updateGasWList();
+    const mode = document.getElementById("deplacementstagemode").value;
+    const distance = parseFloat(document.getElementById("distancestage").value);
+    
+
+//-------------------------REvoir la gestion des erreurs correctement-------//
+    if (mode && !isNaN(distance) && distance > 0) {
       
-    }
+
+    
+        peopleStageTransport.push({mode: mode, distance: distance});
+       updatePeopleStageTransportList();
+}
 }
 
-function updateGasWList(){
-    const list = document.getElementById("gasw-list");
+function updatePeopleStageTransportList(){
+    const list = document.getElementById("peopleStage-transport-list");
     list.innerHTML='';
-    gasW.forEach(g=>{
+    peopleStageTransport.forEach(pt=>{
         const li = document.createElement('li');
-        li.textContent = `Carburant: ${g.type}, Quantité: ${g.quantity} L`;
+        li.textContent= `Mode: ${pt.mode}, Distance: ${pt.distance} km, ${pt.mode === "voitureEssence" || pt.mode === "voitureDiesel" || pt.mode === "hybride" || pt.mode ==="electrique" ? "Voitures" : "Personnes"}: }`;
         list.appendChild(li);
     });
 }
+
+
+
+
 /*---------------------------//fonctions pour déplacements d'invités---------------------------------------------------------
 ----------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
@@ -174,17 +140,13 @@ function addPeopleITransport(){
 
     const mode = document.getElementById("deplacementimode").value;
     const distance = parseFloat(document.getElementById("distancei").value);
-    const number = parseInt(document.getElementById("peoplei").value);
+    
 
 //-------------------------REvoir la gestion des erreurs correctement-------//
     if (mode && !isNaN(distance) && distance > 0) {
-        if (isNaN(number) || number < 1) {
-            alert("Veuillez renseigner un nombre valide (>=1).");
-            return;
-        }
-
+       
     
-        peopleItransport.push({mode: mode, distance: distance, number: number});
+        peopleItransport.push({mode: mode, distance: distance});
        updatePeopleITransportList();
 }
 }
@@ -194,56 +156,14 @@ function updatePeopleITransportList(){
     list.innerHTML='';
     peopleItransport.forEach(pt=>{
         const li = document.createElement('li');
-        li.textContent= `Mode: ${pt.mode}, Distance: ${pt.distance} km, ${pt.mode === "voitureEssence" || pt.mode === "voitureDiesel" || pt.mode === "hybride" || pt.mode ==="electrique" ? "Voitures" : "Personnes"}: ${pt.number}`;
+        li.textContent= `Mode: ${pt.mode}, Distance: ${pt.distance} km, ${pt.mode === "voitureEssence" || pt.mode === "voitureDiesel" || pt.mode === "hybride" || pt.mode ==="electrique" ? "Voitures" : "Personnes"}: `;
         list.appendChild(li);
     });
 }
 
-function updatePeopleINumberLabel() {
-    const mode = document.getElementById("deplacementimode").value;
-    const label = document.getElementById("peopleinvitenumber"); // On récupère l'élément label
 
-    // On compare directement la valeur
-    if (mode === "voitureEssence" || mode === "voitureDiesel" || mode ==="hybride" || mode ==="electrique") {
-        label.textContent = "Nombre de voitures :";
-    } else if(mode ==="avion1court" || mode==="avionmoyen1"|| mode==="avionlong1") {
-        label.textContent ="Nombre de voyages";
-       
-    } else{
-        label.textContent = "Nombre de personnes :";
-    }
-   
 
-    
-}
 
-function addGasI(){
-    const type = document.getElementById("gasi").value;
-    const quantity = parseFloat(document.getElementById("gasi-quantity").value);
-//rajouter correctement la gestion des erreurs
-
-// --------------------------------//
-    if(type && !isNaN(quantity) && quantity>0){
-        if (isNaN(quantity) || quantity < 1) {
-            alert("Veuillez renseigner un nombre valide (>=1).");
-            return;
-        }
-
-        gasI.push({type: type, quantity: quantity});
-        updateGasIList();
-      
-    }
-}
-
-function updateGasIList(){
-    const list = document.getElementById("gasi-list");
-    list.innerHTML='';
-    gasI.forEach(g=>{
-        const li = document.createElement('li');
-        li.textContent = `Carburant: ${g.type}, Quantité: ${g.quantity} L`;
-        list.appendChild(li);
-    });
-}
 
 
 
@@ -269,30 +189,15 @@ function calculatePeopleTransport(){
     let total=0;
     peopleTransports.forEach(pt=>{
         let factor = factors[pt.mode] || 0;
-        total += pt.distance * factor * pt.number;
+        total += pt.distance * factor ;
     });
     return total;
 }
 
-function calculateGasPeople(){
-    const factors={ //à modifier
-        essence: 0.12,
-        essence1: 0.157,
-        gazole: 0.78,
-        biodiesel:0.78,
-        bioethanol:0.45,
-        gnl:0.36
-    };
-    let total=0;
-    gasT.forEach(gt=>{
-        let factor = factors[gt.type] || 0; 
-        total += gt.quantity * factor;
-    });
-   return total;
-}
+
 
 //------------------------Calcul emissions cadre travail----//
-
+//salariés
 function calculatePeopleWTransport(){
     const factors ={  //à modifier
         voitureEssence:0.178,
@@ -316,22 +221,31 @@ function calculatePeopleWTransport(){
     return total;
 }
 
-function calculateGasWPeople(){
-    const factors={ //à modifier
-        essence: 0.12,
-        essence1: 0.157,
-        gazole: 0.78,
-        biodiesel:0.78,
-        bioethanol:0.45,
-        gnl:0.36
+//---------stage
+function calculatePeopleStageTransport(){
+    const factors ={  //à modifier
+        voitureEssence:0.178,
+        voitureDiesel:0.227,
+        hybride:0.175,
+        electrique:0.160,
+        tramway:0.0253,
+        bus:0.027,
+        marche:0,
+        velo:0,
+        train:0.0253
+        
+
     };
+
     let total=0;
-    gasW.forEach(gt=>{
-        let factor = factors[gt.type] || 0; 
-        total += gt.quantity * factor;
+    peopleStageTransport.forEach(pt=>{
+        let factor = factors[pt.mode] || 0;
+        total += pt.distance * factor;
     });
-   return total;
+    return total;
 }
+
+
 
 //----------------------------------calculs émissions invités------//
 
@@ -359,42 +273,27 @@ function calculatePeopleITransport(){
     let total=0;
     peopleItransport.forEach(pt=>{
         let factor = factors[pt.mode];
-        total += pt.distance * factor * pt.number;
+        total += pt.distance * factor ;
     });
     return total;
 }
 
-function calculateGasIPeople(){
-    const factors={ //à modifier
-        essence: 0.12,
-        essence1: 0.157,
-        gazole: 0.78,
-        biodiesel:0.78,
-        bioethanol:0.45,
-        gnl:0.36
-    };
-    let total=0;
-    gasI.forEach(gt=>{
-        let factor = factors[gt.type] || 0; 
-        total += gt.quantity * factor;
-    });
-   return total;
-}
+
 
 //-------------Fonction affichage graphique----------------//
-function displayCarbonChart(co2DeplacementsDomicileTravail,co2DeplacementsCadreTravail,co2DeplacementsInvites){
+function displayCarbonChart(co2DeplacementsDomicileTravail,co2DeplacementsCadreTravail,co2DeplacementsInvites,co2DeplacementsStage){
     const ctx = document.getElementById('co2').getContext('2d');
 
    // Création du graphique
    new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ['Déplacements Domicile Travail', 'Déplacements Cadre Travail','Déplacements invités'],
+        labels: ['Déplacements Domicile Travail', 'Déplacements Cadre Travail','Déplacements invités', 'Déplacement dans le cadre de Stage'],
         datasets: [{
             label: 'Répartion des Émissions carbone (kg CO₂e)',
-            data: [co2DeplacementsDomicileTravail.toFixed(2), co2DeplacementsCadreTravail.toFixed(2), co2DeplacementsInvites.toFixed(2)],
-            backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(80, 24, 192, 0.6)' ],
-            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(80, 24, 192, 1)' ],
+            data: [co2DeplacementsDomicileTravail.toFixed(2), co2DeplacementsCadreTravail.toFixed(2), co2DeplacementsInvites.toFixed(2),co2DeplacementsStage.toFixed(2)],
+            backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(80, 24, 192, 0.6)', 'rgba(25, 130, 160, 0.6)' ],
+            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(80, 24, 192, 1)' , 'rgba(25, 130, 160, 1)'],
             borderWidth: 1
         }]
     },
@@ -429,14 +328,14 @@ function exportExcel(){
     const formatteddate = `${day}-${month}-${year}`;
 
     const worksheetData = [
-        ["Bilan Carbone Total (kg CO₂e)", "Déplacements Domicile-Travail", "Déplacements Cadre-Travail","Déplacements invités", "Date"],
-        [totalCO2.toFixed(2), co2DeplacementsDomicileTravail.toFixed(2), co2DeplacementsCadreTravail.toFixed(2), co2DeplacementsInvites.toFixed(2), formatteddate]
+        ["Bilan Carbone Total (kg CO₂e)", "Déplacements Domicile-Travail", "Déplacements Cadre-Travail","Déplacements invités", "Déplacement dans le cadre du Stage", "Date"],
+        [totalCO2.toFixed(2), co2DeplacementsDomicileTravail.toFixed(2), co2DeplacementsCadreTravail.toFixed(2), co2DeplacementsInvites.toFixed(2), co2DeplacementsStage.toFixed(2), formatteddate]
     ];
     
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Résultats Bilan Carbone");
-    const fileName = `Bilan_Carbone_${formatteddate}.xlsx`;
+    const fileName = `Bilan_Carbone_Déplacements_${formatteddate}.xlsx`;
     XLSX.writeFile(workbook, fileName);
 }
 
@@ -444,23 +343,26 @@ function exportExcel(){
 function calculateCO2(){
     //calcul émissions par section
     co2DeplacementsDomicileTravail = calculatePeopleTransport();
-    co2DeplacementsDomicileTravailCarburant = calculateGasPeople();
+    
     co2DeplacementsCadreTravail = calculatePeopleWTransport();
-    co2DeplacementsCadreTravailCarburant=calculateGasWPeople();
+    
     co2DeplacementsInvites = calculatePeopleITransport();
-    co2DeplacementsInvitesCarburant = calculateGasIPeople();
 
-    totalCO2 = co2DeplacementsDomicileTravail + co2DeplacementsDomicileTravailCarburant + co2DeplacementsCadreTravail + co2DeplacementsCadreTravailCarburant + co2DeplacementsInvites + co2DeplacementsInvitesCarburant;
+    co2DeplacementsStage = calculatePeopleStageTransport();
+    
+
+    totalCO2 = co2DeplacementsDomicileTravail +  + co2DeplacementsCadreTravail +  + co2DeplacementsInvites + co2DeplacementsStage;
     let resultHTML= `
     <p> Le bilan carbone total est de <strong>${totalCO2.toFixed(2)}</strong></p>
-    <p> Emissions liés au déplacement domicile-trvail: <strong> ${co2DeplacementsDomicileTravail.toFixed(2)} </strong> et conso de carburant :<strong> ${co2DeplacementsDomicileTravailCarburant}</strong></p>
-    <p> Emissions déplacement de personnes dans le cadre du travail: <strong>${co2DeplacementsCadreTravail.toFixed(2)}</strong> , en termes de carburant : <strong>${co2DeplacementsCadreTravailCarburant}</strong></p>
-    <p> Emissions déplacement de personnes des invités/visiteurs: <strong>${co2DeplacementsInvites.toFixed(2)}</strong> , en termes de carburant : <strong>${co2DeplacementsInvitesCarburant}</strong></p>
+    <p> Emissions liés au déplacement domicile-trvail: <strong> ${co2DeplacementsDomicileTravail.toFixed(2)} </strong> 
+    <p> Emissions déplacement de personnes dans le cadre du travail: <strong>${co2DeplacementsCadreTravail.toFixed(2)}</strong> 
+    <p> Emissions déplacement de personnes dans le cadre du stage: <strong>${co2DeplacementsStage.toFixed(2)}</strong>
+    <p> Emissions déplacement de personnes des invités/visiteurs: <strong>${co2DeplacementsInvites.toFixed(2)}</strong>
 
     `
     document.getElementById('result').innerHTML= resultHTML;
 
-    displayCarbonChart(co2DeplacementsDomicileTravail,co2DeplacementsCadreTravail,co2DeplacementsInvites);
+    displayCarbonChart(co2DeplacementsDomicileTravail,co2DeplacementsCadreTravail,co2DeplacementsInvites,co2DeplacementsStage);
 
     document.getElementById('formulaire').style.display='none';
     document.getElementById('result-section').style.display='block';
