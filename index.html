@@ -25,6 +25,7 @@
                         </div>
                         <p> Bienvenue sur l'outil de calcul des émissions ges liés aux déplacements.</p>
                         <p> Il est nécessaire d'effectuer un sondage sur les moyens de déplacements avant de remplir ce formulaire(à modifier)</p>
+                        <p>Voir comment on met le questionnaire</p>
                     </section>
 
 
@@ -38,7 +39,7 @@
 
 
                         <label for="deplacementdtmode"> Choisissez un mode de déplacement</label>
-                        <select id="deplacementdtmode" onchange="updatePeopleNumberLabel()">
+                        <select id="deplacementdtmode">
                             <option value=""></option>
                             <option value="voitureEssence">Voiture Motorisation Essence</option>
                             <option value="voitureDiesel">Voiture Motorisation Gazole</option>
@@ -52,43 +53,25 @@
                         </select>
 
                         
-                    <label for="distancedt">Distance aller-retour Domicile Travail (en km)</label>
+                    <label for="distancedt">Distance Totale cumulée Domicile Travail pour ce mode de déplacement (en km)</label>
                     <input type="number" id="distancedt" min="0">
 
-                   <label for="peopledt" id="peoplenumber"> Nombre de personnes</label>
-                   <input type="number" id="peopledt" min="1">
+                  
                    
-                   <button type="button" onclick="addPeopleTransport()">Ajouter</button>
+                   <button type="button" onclick="addPeopleTransport()">Ajouter un mode de déplacement</button>
                    <ul id="people-transport-list"></ul>
 
-                   <h3>Voiture(s) possédée(s) par l'établissement</h3>
-                   <p>Veuillez sélectionnez le type de carburant et la quantité en litres</p>
+                   
 
-                    <label for="gas">Sélectionner le type de carburant</label>
-                    <select id="gas">
-                        <option value=""></option>
-                        <option value="essence">Essence(E10)</option>
-                        <option value="essence1">Essence(E85)</option>
-                        <option value="gazole">Gazole</option>
-                        <option value="biodiesel">Biodiesel</option>
-                        <option value="bioethanol">Bioéthanol</option>
-                        <option value="gnl">GNL(Gaz Naturel Liquéfié)</option>
-                    </select>
-
-                    <label for="gas-quantity">Quantité en litres</label>
-                    <input type="number" id="gas-quantity" min="1" placeholder="en L">
-
-                    <button type="button" onclick="addGas()">Ajouter</button>
-                    <ul id="gas-list"></ul>
-                    </section>
+                   
 
 
                     <section id="deplacementsct">
                         <h2>Déplacement dans le cadre du travail</h2>
 
-                        
+                        <h3>Déplacements des Salariés</h3>
                         <label for="deplacementctmode"> Choisissez un mode de déplacement</label>
-                        <select id="deplacementctmode" onchange="updatePeopleWNumberLabel()">
+                        <select id="deplacementctmode">
                             <option value=""></option>
                             <option value="voitureEssence">Voiture Motorisation Essence</option>
                             <option value="voitureDiesel">Voiture Motorisation Gazole</option>
@@ -107,35 +90,45 @@
                             <option value="avionlong1">Avion Long-courrier (par nombre de voyages)</option>
                         </select>
 
-                        <label for="distancect">Distance aller-retour Domicile Travail (en km)</label>
+                        <label for="distancect">Distance aller-retour  (en km)</label>
                         <input type="number" id="distancect" min="0">
     
                         <label for="peoplect" id="peopleworknumber"> Nombre de personnes</label>
                         <input type="number" id="peoplect" min="1">
 
-                        <button type="button" onclick="addPeopleWTransport()">Ajouter</button>
+                        <button type="button" onclick="addPeopleWTransport()">Ajouter un mode de déplacement</button>
                         <ul id="peoplework-transport-list"></ul>
 
+                        <h3>Déplacement dans le cadre du stage</h3>
+                        <p> Pour cette section, vous pouvez faire une synthèse des données via l'outil Stage et entrer la donnée dans la section déplacement (domicile-lieu) ou sinon faire une synthèse et entrer les données là</p>
+                       
+                        <label for="deplacementstagemode"> Choisissez un mode de déplacement</label>
+                        <select id="deplacementstagemode">
+                            <option value=""></option>
+                            <option value="voitureEssence">Voiture Motorisation Essence</option>
+                            <option value="voitureDiesel">Voiture Motorisation Gazole</option>
+                            <option value="hybride">Véhicule Hybride(mild Essence)</option>
+                            <option value="electrique"> Véhicule électrique</option>
+                            <option value="tramway">Tramway</option>
+                            <option value="bus">Autobus</option>
+                            <option value="marche">Marche</option>
+                            <option value="velo">Vélo</option>
+                            <option value="train">Train</option>
+                            <option value="avioncourt">Avion Court-courrier</option>
+                            <option value="avionmoyen">Avion Moyen-courrier</option>
+                            <option value="avionlong">Avion Long-courrier</option>
+                            <option value="avion1court">Avion Court-courrier (par nombre de voyages)</option>
+                            <option value="avionmoyen1">Avion Moyen-courrier (par nombre de voyages)</option>
+                            <option value="avionlong1">Avion Long-courrier (par nombre de voyages)</option>
+                        </select>
 
-                        <h3>Voiture(s) possédée(s) par l'établissement ou trajets remboursés par l'établissement</h3>
-                   <p>Veuillez sélectionnez le type de carburant et la quantité en litres</p>
+                        <label for="distancestage">Distance aller-retour pour ce mode de transport (en km)</label>
+                        <input type="number" id="distancestage" min="0">
 
-                    <label for="gasw">Sélectionner le type de carburant</label>
-                    <select id="gasw">
-                        <option value=""></option>
-                        <option value="essence">Essence(E10)</option>
-                        <option value="essence1">Essence(E85)</option>
-                        <option value="gazole">Gazole</option>
-                        <option value="biodiesel">Biodiesel</option>
-                        <option value="bioethanol">Bioéthanol</option>
-                        <option value="gnl">GNL(Gaz Naturel Liquéfié)</option>
-                    </select>
+                        
+                    <button type="button" onclick="addPeopleStageTransport()">Ajouter un mode de déplacement</button>
+                    <ul id="peopleStage-transport-list"></ul>
 
-                    <label for="gasw-quantity">Quantité en litres</label>
-                    <input type="number" id="gasw-quantity" min="1" placeholder="en L">
-
-                    <button type="button" onclick="addGasW()">Ajouter</button>
-                    <ul id="gasw-list"></ul>
                     </section>
 
                     
@@ -166,64 +159,23 @@
                             <option value="avionlong1">Avion Long-courrier (par nombre de voyages)</option>
                         </select>
 
-                        <label for="distancei">Distance aller-retour Domicile Travail (en km)</label>
+                        <label for="distancei">Distance aller-retour pour ce mode de transport (en km)</label>
                         <input type="number" id="distancei" min="0">
-    
-                        <label for="peoplei" id="peopleinvitenumber"> Nombre de personnes</label>
-                        <input type="number" id="peoplei" min="1">
+                        
+                        
+                    <button type="button" onclick="addPeopleITransport()">Ajouter un mode de déplacement</button>
+                    <ul id="peopleinvite-transport-list"></ul>
 
-                        <button type="button" onclick="addPeopleITransport()">Ajouter</button>
-                        <ul id="peopleinvite-transport-list"></ul>
+                        
 
 
-                        <h3>Trajets de consommation  remboursés à la consommation de carburant</h3>
-                   <p>Veuillez sélectionnez le type de carburant et la quantité en litres</p>
-
-                    <label for="gasi">Sélectionner le type de carburant</label>
-                    <select id="gasi">
-                        <option value=""></option>
-                        <option value="essence">Essence(E10)</option>
-                        <option value="essence1">Essence(E85)</option>
-                        <option value="gazole">Gazole</option>
-                        <option value="biodiesel">Biodiesel</option>
-                        <option value="bioethanol">Bioéthanol</option>
-                        <option value="gnl">GNL(Gaz Naturel Liquéfié)</option>
-                    </select>
-
-                    <label for="gasi-quantity">Quantité en litres</label>
-                    <input type="number" id="gasi-quantity" min="1" placeholder="en L">
-
-                    <button type="button" onclick="addGasI()">Ajouter</button>
-                    <ul id="gasi-list"></ul>
+                       
                     </section>
 
                     <section>
                         <button type="button" onclick="calculateCO2()">Calculer</button>
-                        <button type="button">rafraichir</button>
+                        <button type="button">Réinitialiser</button>
                     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </form>
             </div>
 
